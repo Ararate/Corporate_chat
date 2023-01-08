@@ -1,0 +1,6 @@
+C:\Users\User\Desktop\Client.pdb
+C:\Users\User\Desktop\clrcompression.dll
+C:\Users\User\Desktop\clrjit.dll
+C:\Users\User\Desktop\coreclr.dll
+C:\Users\User\Desktop\mscordaccore.dll
+C:\Users\User\Desktop\Client.exe

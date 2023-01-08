@@ -1,0 +1,5 @@
+Unable to read data from the transport connection: Удаленный хост принудительно разорвал существующее подключение..
+   at System.Net.Sockets.NetworkStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Server.ClientSession.WaitMessage(Boolean sendToOthers) in C:\Users\User\Desktop\Otus\z10 chat\Server\Server\ClientSession.cs:line 134
+   at Server.ClientSession.ChangeName() in C:\Users\User\Desktop\Otus\z10 chat\Server\Server\ClientSession.cs:line 121
+   at Server.ClientSession.<StartSession>b__13_0() in C:\Users\User\Desktop\Otus\z10 chat\Server\Server\ClientSession.cs:line 42
