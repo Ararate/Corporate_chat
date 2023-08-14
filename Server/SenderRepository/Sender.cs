@@ -85,7 +85,6 @@ namespace Server
                 (byte)(bytes.Length >> 8),
                 (byte)bytes.Length
             };
-            Console.WriteLine(json);
             await stream.WriteAsync(size);
             await stream.WriteAsync(bytes);
             await stream.FlushAsync();
