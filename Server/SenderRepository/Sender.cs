@@ -30,8 +30,7 @@ namespace Server
             {
                 MessageList = messagesList,
             };
-            foreach (var session in _sessions)
-                await SendAsync(session.Stream, dto);
+            Group(group, dto);
         }
 
         public async Task SingleMessage(Message message, UserGroup group)
@@ -40,7 +39,7 @@ namespace Server
             {
                 MessageList = new List<Message>() { message },
             };
-            await SendAsync(_currentSession.Stream, dto);
+            Group(group, dto);
         }
 
         public async Task Notification(string message, ConsoleColor color, UserGroup group)
@@ -50,9 +49,29 @@ namespace Server
             {
                 MessageList = new List<Message>() { new Message(message, color) }
             };
-            foreach (var session in _sessions
+            Group(group, dto);
+        }
+
+        private async void Group(UserGroup group, DTO dto)
+        {
+            if (group == UserGroup.All)
+            {
+                foreach (var session in _sessions)
+                    await SendAsync(session.Stream, dto);
+                return;
+            }
+            if (group == UserGroup.Others)
+            {
+                foreach (var session in _sessions
                     .Where(i => i.Nickname != null && i.Nickname != _currentSession.Nickname))
-                await SendAsync(session.Stream, dto);
+                    await SendAsync(session.Stream, dto);
+                return;
+            }
+            if (group == UserGroup.This)
+            {
+                await SendAsync(_currentSession.Stream, dto);
+                return;
+            }
         }
 
         /// <summary>
@@ -66,6 +85,7 @@ namespace Server
                 (byte)(bytes.Length >> 8),
                 (byte)bytes.Length
             };
+            Console.WriteLine(json);
             await stream.WriteAsync(size);
             await stream.WriteAsync(bytes);
             await stream.FlushAsync();
