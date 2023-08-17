@@ -63,7 +63,7 @@ namespace Server
             if (group == UserGroup.Others)
             {
                 foreach (var session in _sessions
-                    .Where(i => i.Nickname != null && i.Nickname != _currentSession.Nickname))
+                    .Where(i => i != _currentSession))
                     await SendAsync(session.Stream, dto);
                 return;
             }

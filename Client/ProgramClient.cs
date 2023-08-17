@@ -18,15 +18,15 @@ namespace Server
 
         static internal void Main(string[] args)
         {
+            Console.WriteLine("Введите адрес хоста");
             do
             {
                 try
                 {
-                    client = new(Dns.GetHostEntry(Dns.GetHostName()).AddressList[0].ToString(), 7000);
+                    client = new(Console.ReadLine(), 7000);
                 }
                 catch {
-                    Console.WriteLine("Не удаётся подключиться к серверу...");
-                    Thread.Sleep(2000);
+                    Console.WriteLine("Не удаётся подключиться, повторите попытку");
                 }
             }
             while (client == null || !client.Connected);

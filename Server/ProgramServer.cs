@@ -28,8 +28,11 @@ namespace Server
         {
             TcpListener socket = new(IPAddress.Any, 7000);
             socket.Start();
-            Console.WriteLine("Сервер запущен по адресу "+ 
-                Dns.GetHostEntry(Dns.GetHostName()).AddressList[0]);
+                        
+            foreach(var a in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+            {
+                Console.WriteLine(a.ToString());
+            }
             MapCommands();
             while (true)
             {
@@ -67,9 +70,8 @@ namespace Server
                             type.GetProperty("Users", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(obj, sessions);
                             method.Invoke(obj, new object[] { parameters });
                         }
-                        catch (Exception ex) 
+                        catch
                         {
-                            session.sender.Notification(ex.Message, ConsoleColor.White, UserGroup.This);
                         }
                     });
                 }

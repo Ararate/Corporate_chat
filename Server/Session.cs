@@ -74,6 +74,10 @@ namespace Server
                                 (new Message($"{Nickname}: ", message, NickColor), UserGroup.Others);
                     }
                 }
+                catch (InvalidOperationException e)
+                {
+
+                }
                 catch (Exception e)
                 {
                     if (!e.Message.Contains("Удаленный хост принудительно " +
